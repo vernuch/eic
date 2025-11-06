@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/schedule_item_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/text_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="08:30 - 10:00"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:gravity="start" />
+
+        <TextView
+            android:id="@+id/text_subject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="Математика"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/text_room"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Ауд. 305"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="end" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/replacement_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="4dp"
+        android:visibility="gone"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/text_replacement_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="08:30 - 10:00"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="start" />
+
+        <TextView
+            android:id="@+id/text_replacement_subject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="Информатика (замена)"
+            android:textSize="13sp"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/text_replacement_room"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Ауд. 101"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="end" />
+    </LinearLayout>
+
+</LinearLayout>
+

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textTime"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="09:00 - 10:30"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textSubject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Математика"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textRoom"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="101"
+            android:textSize="14sp"
+            android:gravity="end"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutReplacement"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textReplacementTime"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="09:00 - 10:30"
+            android:textSize="12sp"
+            android:textColor="#888888"/>
+
+        <TextView
+            android:id="@+id/textReplacementSubject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Математика"
+            android:textSize="12sp"
+            android:textColor="#888888"/>
+
+        <TextView
+            android:id="@+id/textReplacementRoom"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="101"
+            android:textSize="12sp"
+            android:gravity="end"
+            android:textColor="#888888"/>
+    </LinearLayout>
+</LinearLayout>

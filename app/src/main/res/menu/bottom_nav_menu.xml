@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_schedule"
+        android:icon="@drawable/ic_schedule"
+        android:title="Расписание"/>
+    <item
+        android:id="@+id/navigation_tasks"
+        android:icon="@drawable/ic_tasks"
+        android:title="Задания"/>
+    <item
+        android:id="@+id/navigation_exams"
+        android:icon="@drawable/ic_exam"
+        android:title="Экзамены"/>
+    <item
+        android:id="@+id/navigation_messages"
+        android:icon="@drawable/ic_messages"
+        android:title="Сообщения"/>
+</menu>
+

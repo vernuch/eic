@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="?android:attr/windowBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="Назад" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Настройки"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        android:gravity="center_horizontal"
+        android:divider="?android:attr/listDivider"
+        android:showDividers="none">
+
+        <Button
+            android:id="@+id/btnEljurAuth"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:text="Элжур"
+            android:textSize="16sp"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_button" />
+
+        <Button
+            android:id="@+id/btnTelegramAuth"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:text="Telegram"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_button" />
+
+        <Button
+            android:id="@+id/btnClearDb"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:text="Очистить БД"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_button" />
+
+        <Button
+            android:id="@+id/btnTheme"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:text="Сменить тему"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_button" />
+
+        <Button
+            android:id="@+id/btnHelp"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:text="Справка"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_button" />
+    </LinearLayout>
+</LinearLayout>
+

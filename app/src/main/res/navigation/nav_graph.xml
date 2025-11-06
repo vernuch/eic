@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navigation_schedule">
+
+    <fragment
+        android:id="@+id/navigation_schedule"
+        android:name="com.example.myapplication.ui.schedule.ScheduleFragment"
+        android:label="Расписание"
+        tools:layout="@layout/fragment_schedule" />
+
+    <fragment
+        android:id="@+id/navigation_tasks"
+        android:name="com.example.myapplication.TasksFragment"
+        android:label="Задания"
+        tools:layout="@layout/fragment_tasks" />
+
+    <fragment
+        android:id="@+id/navigation_exams"
+        android:name="com.example.myapplication.ExamsFragment"
+        android:label="Экзамены"
+        tools:layout="@layout/fragment_exams" />
+
+    <fragment
+        android:id="@+id/navigation_messages"
+        android:name="com.example.myapplication.MessagesFragment"
+        android:label="Сообщения"
+        tools:layout="@layout/fragment_messages" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.myapplication.ui.settings.SettingsFragment"
+        android:label="Настройки"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/navigation_eljur_auth"
+        android:name="com.example.myapplication.ui.settings.EljurAuthFragment"
+        android:label="Авторизация Элжур"
+        tools:layout="@layout/fragment_eljur_auth" />
+
+</navigation>
