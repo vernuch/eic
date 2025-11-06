@@ -1,0 +1,30 @@
+убрать цвет топ бар
+изменить иконки
+в принципе подумать о цветах
+
+
+shadel:
+прокрутка недели
+кнопка редакции
+логика замен
+преподаватели?
+автоматический выбор даты
+
+tasks:
+поменять внешний вид кнопок
+
+exams:
+внешний вид блоков
+
+сообщения, добавить блоки
+поменять кнопки
+
+
+такс фрагмент
+private fun loadTasks() {
+        lifecycleScope.launch {
+            activeTasks = taskDao.getActiveTasks()
+            archivedTasks = taskDao.getArchivedTasks()
+            if (showingActive) showActiveTasks() else showArchivedTasks()
+        }
+    }

@@ -1,4 +1,42 @@
 package com.example.myapplication.data.worker
 
-class EljurSyncWorker {
+import android.content.Context
+import androidx.work.CoroutineWorker
+import androidx.work.WorkerParameters
+import com.example.myapplication.data.database.AppDatabase
+import com.example.myapplication.data.repository.EljurRepository
+
+class EljurSyncWorker(
+    context: Context,
+    params: WorkerParameters
+) : CoroutineWorker(context, params) {
+
+    override suspend fun doWork(): Result {
+        val db = AppDatabase.getDatabase(applicationContext)
+        val repo = EljurRepository(
+            integrationDao = db.integrationDao(),
+            scheduleDao = db.scheduleDao(),
+            subjectDao = db.subjectDao(),
+            teacherDao = db.teacherDao(),
+            taskDao = db.taskDao(),
+            messageDao = db.messageDao(),
+            fileDao = db.fileDao()
+        )
+
+        try {
+            val authorized = repo.authorizeEljur()
+            if (!authorized) return Result.retry()
+
+            repo.fetchSchedule()
+            repo.fetchTasks()
+            repo.fetchMessages()
+            repo.fetchReplacements()
+
+            return Result.success()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return Result.retry()
+        }
+    }
 }
+

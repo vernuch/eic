@@ -17,7 +17,9 @@ import com.example.myapplication.data.dao.*
         ExamEntity::class,
         MessageEntity::class,
         SettingsEntity::class,
-        IntegrationEntity::class
+        IntegrationEntity::class,
+        ReplacementEntity::class,
+        FileEntity::class
     ],
     version = 1,
     exportSchema = false
@@ -33,6 +35,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun messageDao(): MessageDao
     abstract fun settingsDao(): SettingsDao
     abstract fun integrationDao(): IntegrationDao
+    abstract fun ReplacementDao(): ReplacementDao
+    abstract fun fileDao(): FileDao
 
     companion object {
         @Volatile

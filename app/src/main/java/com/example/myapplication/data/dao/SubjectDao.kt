@@ -15,6 +15,10 @@ interface SubjectDao {
     @Query("SELECT * FROM subjects")
     suspend fun getAllSubjects(): List<SubjectEntity>
 
+    @Query("SELECT * FROM subjects WHERE name = :name LIMIT 1")
+    suspend fun getSubjectByName(name: String): SubjectEntity?
+
     @Query("DELETE FROM subjects")
     suspend fun deleteAllSubjects()
 }
+
