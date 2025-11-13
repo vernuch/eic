@@ -19,7 +19,8 @@ import com.example.myapplication.data.dao.*
         SettingsEntity::class,
         IntegrationEntity::class,
         ReplacementEntity::class,
-        FileEntity::class
+        FileEntity::class,
+        TelegramMessageEntity::class
     ],
     version = 1,
     exportSchema = false
@@ -35,8 +36,9 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun messageDao(): MessageDao
     abstract fun settingsDao(): SettingsDao
     abstract fun integrationDao(): IntegrationDao
-    abstract fun ReplacementDao(): ReplacementDao
+    abstract fun replacementDao(): ReplacementDao
     abstract fun fileDao(): FileDao
+    abstract fun telegramDao(): TelegramDao
 
     companion object {
         @Volatile
