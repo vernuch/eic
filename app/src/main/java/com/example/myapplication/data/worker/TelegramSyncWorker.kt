@@ -1,7 +1,6 @@
 package com.example.myapplication.data.worker
 
 import android.content.Context
-import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.myapplication.data.database.AppDatabase
