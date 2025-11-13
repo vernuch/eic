@@ -28,7 +28,6 @@ class TelegramRepository(
 
     private val repoScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
-    // 🔹 Инициализация TDLib
     fun initTDLib(apiId: Int, apiHash: String) {
         if (client != null) return
 
@@ -67,7 +66,6 @@ class TelegramRepository(
         return dir.absolutePath
     }
 
-    // 🔹 Авторизация
     fun sendPhoneNumber(phone: String) {
         client?.send(TdApi.SetAuthenticationPhoneNumber(phone, null)) { obj ->
             authCallback(obj)
@@ -100,7 +98,6 @@ class TelegramRepository(
         }
     }
 
-    // 🔹 Обработка обновлений
     private fun onUpdate(update: TdApi.Object) {
         when (update) {
             is TdApi.UpdateNewMessage -> handleMessage(update.message)
@@ -121,7 +118,6 @@ class TelegramRepository(
         }
     }
 
-    // 🔹 Получение чатов
     fun fetchChats(limit: Int = 50) {
         if (!isAuthorized) return
         client?.send(TdApi.GetChats(TdApi.ChatListMain(), limit)) { obj ->
@@ -146,7 +142,6 @@ class TelegramRepository(
         }
     }
 
-    // 🔹 Получение истории сообщений
     fun fetchChatHistory(chatId: Long, limit: Int = 50) {
         if (!isAuthorized) return
         client?.send(TdApi.GetChatHistory(chatId, 0, 0, limit, false)) { obj ->
@@ -161,7 +156,6 @@ class TelegramRepository(
         }
     }
 
-    // 🔹 Сохранение сообщений в БД
     private fun handleMessage(msg: TdApi.Message) {
         val contentText = when (val content = msg.content) {
             is TdApi.MessageText -> content.text.text
@@ -199,7 +193,6 @@ class TelegramRepository(
         }
     }
 
-    // 🔹 Получение сообщений из БД
     suspend fun getAllMessages(): List<TelegramMessageEntity> =
         withContext(Dispatchers.IO) { telegramDao.getAllMessages() }
 

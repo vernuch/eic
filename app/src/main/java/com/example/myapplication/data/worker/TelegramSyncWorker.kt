@@ -19,11 +19,11 @@ class TelegramSyncWorker(
             val repository = TelegramRepository(applicationContext, db.telegramDao())
 
             repository.initTDLib(
-                apiId = 123456,        // твой api_id
-                apiHash = "abcdef1234567890"  // твой api_hash
+                apiId = 123456,
+                apiHash = "abcdef1234567890"
             )
 
-            repository.getAllMessages() // просто получаем текущие для примера
+            repository.getAllMessages()
 
             Result.success()
         } catch (e: Exception) {
