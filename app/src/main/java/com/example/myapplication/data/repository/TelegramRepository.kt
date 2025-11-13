@@ -32,7 +32,7 @@ class TelegramRepository(
         if (client != null) return
 
         try {
-            System.loadLibrary("tdjni") // libtdjni.so
+            System.loadLibrary("tdjni") 
         } catch (e: UnsatisfiedLinkError) {
             Log.e("TelegramRepository", "Failed to load tdjni: ${e.message}")
             return
