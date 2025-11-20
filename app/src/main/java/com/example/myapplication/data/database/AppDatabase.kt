@@ -39,6 +39,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun replacementDao(): ReplacementDao
     abstract fun fileDao(): FileDao
     abstract fun telegramDao(): TelegramDao
+    abstract fun studentInfoDao(): StudentInfoDao
 
     companion object {
         @Volatile

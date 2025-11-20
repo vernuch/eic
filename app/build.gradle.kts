@@ -44,6 +44,21 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    // ДОБАВЬТЕ ЭТОТ БЛОК
+    packagingOptions {
+        resources {
+            excludes += listOf(
+                "META-INF/DEPENDENCIES",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt",
+                "META-INF/INDEX.LIST",
+                "META-INF/*.kotlin_module"
+            )
+        }
+    }
 }
 
 dependencies {
@@ -87,11 +102,22 @@ dependencies {
 
     implementation(files("libs/tdlib-v1.8.50.jar"))
 
+    // ИЗМЕНИТЕ PDFBox - добавьте exclude
+    implementation("com.tom-roush:pdfbox-android:2.0.27.0") {
+        exclude(group = "org.apache", module = "fontbox")
+    }
+
+    // ИСПРАВЛЕННЫЙ СИНТАКСИС ДЛЯ POI
+    implementation("org.apache.poi:poi:4.1.2")
+    implementation("org.apache.poi:poi-ooxml:4.1.2") {
+        exclude(group = "org.apache.xmlbeans", module = "xmlbeans")
+    }
+
+    implementation ("org.apache.xmlbeans:xmlbeans:3.1.0")
+    implementation ("xerces:xercesImpl:2.12.2")
 
 }
 
 tasks.withType<Test>().configureEach {
     enabled = false
 }
-
-

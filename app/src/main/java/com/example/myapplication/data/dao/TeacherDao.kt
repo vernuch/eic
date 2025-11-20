@@ -17,4 +17,7 @@ interface TeacherDao {
 
     @Query("DELETE FROM teachers")
     suspend fun deleteAllTeachers()
+
+    @Query("SELECT * FROM teachers WHERE name = :name")
+    suspend fun getTeacherByName(name: String): TeacherEntity?
 }

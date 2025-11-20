@@ -10,5 +10,8 @@ data class TelegramMessageEntity(
     val sender_name: String,
     val content: String?,
     val media_url: String?,
-    val date: String
+    val date: String,
+    val message_type: String = "OTHER",
+    val confidence: Float = 0f,
+    val extracted_data: String? = null
 )

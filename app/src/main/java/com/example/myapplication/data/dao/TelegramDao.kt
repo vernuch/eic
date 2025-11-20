@@ -8,17 +8,16 @@ import com.example.myapplication.data.entities.TelegramMessageEntity
 
 @Dao
 interface TelegramDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMessages(messages: List<TelegramMessageEntity>)
 
     @Query("SELECT * FROM telegram_messages ORDER BY date DESC")
     suspend fun getAllMessages(): List<TelegramMessageEntity>
 
-    @Query("DELETE FROM telegram_messages")
-    suspend fun clearAll()
-
     @Query("SELECT * FROM telegram_messages WHERE chat_id = :chatId ORDER BY date DESC")
     suspend fun getMessagesForChat(chatId: Long): List<TelegramMessageEntity>
-}
 
+    // Добавьте этот метод
+    @Query("SELECT * FROM telegram_messages WHERE message_type = :type ORDER BY date DESC")
+    suspend fun getMessagesByType(type: String): List<TelegramMessageEntity>
+}
