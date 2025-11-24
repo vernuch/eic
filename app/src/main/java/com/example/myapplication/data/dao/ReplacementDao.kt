@@ -8,6 +8,8 @@ import com.example.myapplication.data.entities.ReplacementEntity
 
 @Dao
 interface ReplacementDao {
+    @Query("DELETE FROM replacements")
+    suspend fun deleteAllReplacements()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertReplacement(replacement: ReplacementEntity)

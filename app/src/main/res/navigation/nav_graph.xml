@@ -32,12 +32,34 @@
         android:id="@+id/navigation_settings"
         android:name="com.example.myapplication.ui.settings.SettingsFragment"
         android:label="Настройки"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings">
+
+        <action
+            android:id="@+id/action_settings_to_telegramAuth"
+            app:destination="@id/telegramAuthFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_eljur_auth"
         android:name="com.example.myapplication.ui.settings.EljurAuthFragment"
         android:label="Авторизация Элжур"
         tools:layout="@layout/fragment_eljur_auth" />
+
+    <fragment
+        android:id="@+id/telegramAuthFragment"
+        android:name="com.example.myapplication.ui.telegram.TelegramAuthFragment"
+        android:label="Авторизация Telegram"
+        tools:layout="@layout/fragment_telegram_auth">
+
+        <action
+            android:id="@+id/action_telegramAuthFragment_to_chatSelectionFragment"
+            app:destination="@id/chatSelectionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatSelectionFragment"
+        android:name="com.example.myapplication.ui.telegram.ChatSelectionFragment"
+        android:label="Выбор чата"
+        tools:layout="@layout/fragment_chat_selection" />
 
 </navigation>

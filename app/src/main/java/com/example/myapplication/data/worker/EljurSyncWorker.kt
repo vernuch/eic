@@ -20,7 +20,9 @@ class EljurSyncWorker(
             teacherDao = db.teacherDao(),
             taskDao = db.taskDao(),
             messageDao = db.messageDao(),
-            fileDao = db.fileDao()
+            fileDao = db.fileDao(),
+            replacementDao = db.replacementDao(),
+            studentInfoDao = db.studentInfoDao()
         )
 
         try {

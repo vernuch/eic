@@ -8,6 +8,10 @@ import com.example.myapplication.data.entities.FileEntity
 
 @Dao
 interface FileDao {
+
+    @Query("SELECT * FROM files")
+    suspend fun getAllFiles(): List<FileEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFile(file: FileEntity)
 

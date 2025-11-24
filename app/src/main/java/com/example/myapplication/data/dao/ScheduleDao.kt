@@ -18,6 +18,9 @@ interface ScheduleDao {
     @Query("DELETE FROM schedule")
     suspend fun deleteAllSchedules()
 
+    @Query("SELECT * FROM schedule")
+    suspend fun getAllSchedules(): List<ScheduleEntity>
+
     @Query("SELECT * FROM schedule WHERE date = :date AND week_type = :weekType")
     suspend fun getSchedulesByDateAndWeek(date: String, weekType: Int): List<ScheduleEntity>
 

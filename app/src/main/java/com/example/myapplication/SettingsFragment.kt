@@ -36,9 +36,14 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(R.id.navigation_eljur_auth)
         }
 
+        binding.btnTelegramAuth.setOnClickListener {
+            findNavController().navigate(R.id.action_settings_to_telegramAuth)
+        }
 
         return binding.root
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

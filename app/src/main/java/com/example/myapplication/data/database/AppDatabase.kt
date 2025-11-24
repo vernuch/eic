@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.myapplication.data.entities.*
+import androidx.room.TypeConverters
 import com.example.myapplication.data.dao.*
+import com.example.myapplication.data.entities.*
 
 @Database(
     entities = [
@@ -20,9 +21,10 @@ import com.example.myapplication.data.dao.*
         IntegrationEntity::class,
         ReplacementEntity::class,
         FileEntity::class,
-        TelegramMessageEntity::class
+        TelegramMessageEntity::class,
+        StudentInfoEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -51,7 +53,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

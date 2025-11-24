@@ -31,6 +31,160 @@ class EljurRepository(
         private const val TYPE_OTHER = "OTHER"
     }
 
+    // === МЕТОДЫ ДЛЯ ПОЛУЧЕНИЯ ЛОКАЛЬНЫХ ДАННЫХ ===
+
+    suspend fun getLocalStudentInfo(): StudentInfoEntity? = withContext(Dispatchers.IO) {
+        try {
+            studentInfoDao.getStudentInfo()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting local student info: ${e.message}")
+            null
+        }
+    }
+
+    suspend fun getLocalSchedule(): List<ScheduleEntity> = withContext(Dispatchers.IO) {
+        try {
+            scheduleDao.getAllSchedules()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting local schedule: ${e.message}")
+            emptyList()
+        }
+    }
+
+    suspend fun getLocalTasks(): List<TaskEntity> = withContext(Dispatchers.IO) {
+        try {
+            taskDao.getAllTasks()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting local tasks: ${e.message}")
+            emptyList()
+        }
+    }
+
+    suspend fun getLocalMessages(): List<MessageEntity> = withContext(Dispatchers.IO) {
+        try {
+            messageDao.getAllMessages()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting local messages: ${e.message}")
+            emptyList()
+        }
+    }
+
+    suspend fun getLocalFiles(): List<FileEntity> = withContext(Dispatchers.IO) {
+        try {
+            fileDao.getAllFiles()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting local files: ${e.message}")
+            emptyList()
+        }
+    }
+
+    suspend fun getLocalReplacements(): List<ReplacementEntity> = withContext(Dispatchers.IO) {
+        try {
+            replacementDao.getAllReplacements()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting local replacements: ${e.message}")
+            emptyList()
+        }
+    }
+
+    // === ФИЛЬТРУЮЩИЕ МЕТОДЫ ===
+
+    suspend fun getScheduleForDate(date: String): List<ScheduleEntity> = withContext(Dispatchers.IO) {
+        try {
+            scheduleDao.getSchedulesByDate(date)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting schedule for date: ${e.message}")
+            emptyList()
+        }
+    }
+
+    suspend fun getTasksForDate(date: String): List<TaskEntity> = withContext(Dispatchers.IO) {
+        try {
+            taskDao.getTasksByDate(date)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting tasks for date: ${e.message}")
+            emptyList()
+        }
+    }
+
+    suspend fun getActiveTasks(): List<TaskEntity> = withContext(Dispatchers.IO) {
+        try {
+            taskDao.getTasksByStatus("active")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting active tasks: ${e.message}")
+            emptyList()
+        }
+    }
+
+    suspend fun getCompletedTasks(): List<TaskEntity> = withContext(Dispatchers.IO) {
+        try {
+            taskDao.getTasksByStatus("completed")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting completed tasks: ${e.message}")
+            emptyList()
+        }
+    }
+
+    suspend fun getTasksBySubject(subjectId: Int): List<TaskEntity> = withContext(Dispatchers.IO) {
+        try {
+            taskDao.getTasksBySubject(subjectId)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting tasks by subject: ${e.message}")
+            emptyList()
+        }
+    }
+
+    suspend fun getSubjects(): List<SubjectEntity> = withContext(Dispatchers.IO) {
+        try {
+            subjectDao.getAllSubjects()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting subjects: ${e.message}")
+            emptyList()
+        }
+    }
+
+    suspend fun getTeachers(): List<TeacherEntity> = withContext(Dispatchers.IO) {
+        try {
+            teacherDao.getAllTeachers()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting teachers: ${e.message}")
+            emptyList()
+        }
+    }
+
+    // === МЕТОДЫ ДЛЯ ОБНОВЛЕНИЯ ДАННЫХ ===
+
+    suspend fun updateTaskStatus(taskId: Int, status: String) = withContext(Dispatchers.IO) {
+        try {
+            taskDao.updateTaskStatus(taskId, status)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error updating task status: ${e.message}")
+        }
+    }
+
+    suspend fun deleteTask(taskId: Int) = withContext(Dispatchers.IO) {
+        try {
+            taskDao.deleteTask(taskId)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error deleting task: ${e.message}")
+        }
+    }
+
+    suspend fun clearAllData() = withContext(Dispatchers.IO) {
+        try {
+            scheduleDao.deleteAllSchedules()
+            taskDao.deleteAllTasks()
+            messageDao.deleteAllMessages()
+            replacementDao.deleteAllReplacements()
+            fileDao.deleteAllFiles()
+            Log.d(TAG, "All local data cleared")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error clearing data: ${e.message}")
+        }
+    }
+
+    // === СУЩЕСТВУЮЩИЕ МЕТОДЫ (остаются без изменений) ===
+
     suspend fun authorizeEljur(): Boolean = withContext(Dispatchers.IO) {
         try {
             val integration = integrationDao.getAllIntegrations().find { it.service == "eljur" }

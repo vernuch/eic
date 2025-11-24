@@ -27,9 +27,8 @@ class TelegramSyncWorker(
             val db = AppDatabase.getDatabase(applicationContext)
             val repository = TelegramRepository(applicationContext, db.telegramDao())
 
-            // Инициализация TDLib (нужно заменить на реальные значения)
-            val apiId = inputData.getInt("api_id", 123456)
-            val apiHash = inputData.getString("api_hash") ?: "abcdef1234567890"
+            val apiId = inputData.getInt("api_id", 33509625)
+            val apiHash = inputData.getString("api_hash") ?: "15f188573a4c526e73560eb271aa8a35"
 
             repository.initTDLib(apiId = apiId, apiHash = apiHash)
 

@@ -20,4 +20,5 @@ interface TeacherDao {
 
     @Query("SELECT * FROM teachers WHERE name = :name")
     suspend fun getTeacherByName(name: String): TeacherEntity?
+
 }

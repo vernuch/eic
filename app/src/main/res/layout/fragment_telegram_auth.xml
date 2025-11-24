@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="?android:attr/windowBackground">
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Авторизация в Telegram"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp" />
+
+    <!-- progress -->
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@id/titleText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"/>
+
+    <!-- Phone input block -->
+    <LinearLayout
+        android:id="@+id/phoneBlock"
+        android:layout_below="@id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="18dp">
+
+        <EditText
+            android:id="@+id/phoneInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="+7 912 000 00 00"
+            android:inputType="phone"
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext_bg"/>
+
+        <TextView
+            android:id="@+id/phoneError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="Неверный номер"
+            android:layout_marginTop="6dp"/>
+
+        <Button
+            android:id="@+id/phoneNextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Отправить номер"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rounded_button_bg"
+            android:minWidth="140dp"/>
+    </LinearLayout>
+
+    <!-- Code input block -->
+    <LinearLayout
+        android:id="@+id/codeBlock"
+        android:layout_below="@id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="18dp">
+
+        <TextView
+            android:id="@+id/codeHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Введите код из Telegram / SMS"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/codeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Код"
+            android:inputType="number"
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext_bg"/>
+
+        <TextView
+            android:id="@+id/codeError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="Неверный код"
+            android:layout_marginTop="6dp"/>
+
+        <Button
+            android:id="@+id/codeNextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Отправить код"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rounded_button_bg"
+            android:minWidth="140dp"/>
+    </LinearLayout>
+
+    <!-- Password input block -->
+    <LinearLayout
+        android:id="@+id/passwordBlock"
+        android:layout_below="@id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="18dp">
+
+        <TextView
+            android:id="@+id/passwordHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Введите пароль (2FA)"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/passwordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Пароль"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext_bg"/>
+
+        <TextView
+            android:id="@+id/passwordError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="Неверный пароль"
+            android:layout_marginTop="6dp"/>
+
+        <Button
+            android:id="@+id/passwordNextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Войти"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rounded_button_bg"
+            android:minWidth="140dp"/>
+    </LinearLayout>
+
+    <!-- generic error at bottom -->
+    <TextView
+        android:id="@+id/genericError"
+        android:layout_below="@id/passwordBlock"
+        android:layout_marginTop="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="gone"
+        android:text="Ошибка авторизации" />
+
+</RelativeLayout>

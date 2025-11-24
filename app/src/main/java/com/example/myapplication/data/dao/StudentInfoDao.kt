@@ -45,4 +45,7 @@ interface StudentInfoDao {
 
     @Query("UPDATE student_info SET last_updated = :timestamp WHERE student_id = :studentId")
     suspend fun updateLastUpdated(studentId: Int, timestamp: String)
+
+    @Query("SELECT * FROM student_info LIMIT 1")
+    suspend fun getStudentInfo(): StudentInfoEntity?
 }
