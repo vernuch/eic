@@ -7,6 +7,9 @@ import com.example.myapplication.data.repository.EljurRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication.data.repository.EljurRepository.AuthResult
+import com.example.myapplication.data.repository.EljurRepository.DataResult
 
 class EljurViewModel(private val repository: EljurRepository) : ViewModel() {
 
@@ -78,12 +81,40 @@ class EljurViewModel(private val repository: EljurRepository) : ViewModel() {
         }
     }
 
+    fun loadStudentInfo() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            try {
+                when (val result = repository.fetchStudentInfo()) {
+                    is DataResult.Success -> {
+                        _studentInfo.value = result.data
+                    }
+                    is DataResult.Error -> {
+                        _errorMessage.value = result.message
+                        _studentInfo.value = null
+                    }
+                }
+            } catch (e: Exception) {
+                _errorMessage.value = "Ошибка загрузки информации: ${e.message}"
+                _studentInfo.value = null
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
     fun refreshSchedule() {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                repository.fetchSchedule()
-                loadSchedule()
+                when (val result = repository.fetchSchedule()) {
+                    is DataResult.Success -> {
+                        loadSchedule()
+                    }
+                    is DataResult.Error -> {
+                        _errorMessage.value = result.message
+                    }
+                }
             } catch (e: Exception) {
                 _errorMessage.value = "Ошибка загрузки расписания: ${e.message}"
             } finally {
@@ -96,8 +127,14 @@ class EljurViewModel(private val repository: EljurRepository) : ViewModel() {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                repository.fetchTasks()
-                loadTasks()
+                when (val result = repository.fetchTasks()) {
+                    is DataResult.Success -> {
+                        loadTasks()
+                    }
+                    is DataResult.Error -> {
+                        _errorMessage.value = result.message
+                    }
+                }
             } catch (e: Exception) {
                 _errorMessage.value = "Ошибка загрузки заданий: ${e.message}"
             } finally {
@@ -110,8 +147,14 @@ class EljurViewModel(private val repository: EljurRepository) : ViewModel() {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                repository.fetchMessages()
-                loadMessages()
+                when (val result = repository.fetchMessages()) {
+                    is DataResult.Success -> {
+                        loadMessages()
+                    }
+                    is DataResult.Error -> {
+                        _errorMessage.value = result.message
+                    }
+                }
             } catch (e: Exception) {
                 _errorMessage.value = "Ошибка загрузки сообщений: ${e.message}"
             } finally {
@@ -124,8 +167,14 @@ class EljurViewModel(private val repository: EljurRepository) : ViewModel() {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                repository.fetchReplacements()
-                loadReplacements()
+                when (val result = repository.fetchReplacements()) {
+                    is DataResult.Success -> {
+                        loadReplacements()
+                    }
+                    is DataResult.Error -> {
+                        _errorMessage.value = result.message
+                    }
+                }
             } catch (e: Exception) {
                 _errorMessage.value = "Ошибка загрузки замен: ${e.message}"
             } finally {
@@ -134,17 +183,10 @@ class EljurViewModel(private val repository: EljurRepository) : ViewModel() {
         }
     }
 
-    fun loadStudentInfo() {
-        viewModelScope.launch {
-            _isLoading.value = true
-            try {
-                val info = repository.fetchStudentInfo()
-                _studentInfo.value = info
-            } catch (e: Exception) {
-                _errorMessage.value = "Ошибка загрузки информации: ${e.message}"
-            } finally {
-                _isLoading.value = false
-            }
+    suspend fun authorize(): Boolean {
+        return when (repository.authorizeEljur()) {
+            is AuthResult.Success -> true
+            is AuthResult.Error -> false
         }
     }
 
@@ -268,7 +310,16 @@ class EljurViewModel(private val repository: EljurRepository) : ViewModel() {
         _syncStatus.value = SyncStatus.IDLE
     }
 
-    suspend fun authorize(): Boolean {
-        return repository.authorizeEljur()
+    class EljurViewModelFactory(
+        private val repository: EljurRepository
+    ) : ViewModelProvider.Factory {
+
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(EljurViewModel::class.java)) {
+                return EljurViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
     }
 }

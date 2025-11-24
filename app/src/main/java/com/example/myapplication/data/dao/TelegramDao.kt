@@ -17,7 +17,6 @@ interface TelegramDao {
     @Query("SELECT * FROM telegram_messages WHERE chat_id = :chatId ORDER BY date DESC")
     suspend fun getMessagesForChat(chatId: Long): List<TelegramMessageEntity>
 
-    // Добавьте этот метод
     @Query("SELECT * FROM telegram_messages WHERE message_type = :type ORDER BY date DESC")
     suspend fun getMessagesByType(type: String): List<TelegramMessageEntity>
 }

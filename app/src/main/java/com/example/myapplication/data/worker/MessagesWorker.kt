@@ -6,7 +6,7 @@ import androidx.work.WorkerParameters
 import com.example.myapplication.data.database.AppDatabase
 import com.example.myapplication.data.repository.EljurRepository
 import com.example.myapplication.data.repository.TelegramRepository
-import com.example.myapplication.data.telegram.TelegramConfig // ДОБАВЬТЕ ЭТОТ ФАЙЛ
+import com.example.myapplication.data.telegram.TelegramConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -31,9 +31,14 @@ class MessagesWorker(
                 studentInfoDao = db.studentInfoDao()
             )
 
-            val authorized = eljurRepo.authorizeEljur()
-            if (authorized) {
-                eljurRepo.fetchMessages()
+            // Исправленная проверка авторизации Eljur
+            when (eljurRepo.authorizeEljur()) {
+                is EljurRepository.AuthResult.Success -> {
+                    eljurRepo.fetchMessages()
+                }
+                is EljurRepository.AuthResult.Error -> {
+                    // Продолжаем работу даже если Eljur не авторизован
+                }
             }
 
             val telegramRepo = TelegramRepository(applicationContext, db.telegramDao())

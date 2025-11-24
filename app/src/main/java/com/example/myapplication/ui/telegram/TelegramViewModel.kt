@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.drinkless.tdlib.TdApi
+import androidx.lifecycle.ViewModelProvider
 
 class TelegramViewModel(private val repository: TelegramRepository) : ViewModel() {
 
@@ -117,5 +118,18 @@ class TelegramViewModel(private val repository: TelegramRepository) : ViewModel(
     override fun onCleared() {
         super.onCleared()
         repository.close()
+    }
+
+    class TelegramViewModelFactory(
+        private val repository: TelegramRepository
+    ) : ViewModelProvider.Factory {
+
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(TelegramViewModel::class.java)) {
+                return TelegramViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
     }
 }

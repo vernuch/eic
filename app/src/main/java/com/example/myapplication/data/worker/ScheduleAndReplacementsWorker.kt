@@ -28,14 +28,16 @@ class ScheduleAndReplacementsWorker(
                 studentInfoDao = db.studentInfoDao()
             )
 
-            val authorized = repo.authorizeEljur()
-            if (!authorized) return@withContext Result.retry()
-
-            repo.fetchSchedule()
-
-            repo.fetchReplacements()
-
-            Result.success()
+            when (repo.authorizeEljur()) {
+                is EljurRepository.AuthResult.Success -> {
+                    repo.fetchSchedule()
+                    repo.fetchReplacements()
+                    Result.success()
+                }
+                is EljurRepository.AuthResult.Error -> {
+                    Result.retry()
+                }
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             Result.retry()

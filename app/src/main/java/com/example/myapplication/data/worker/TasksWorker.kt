@@ -28,12 +28,15 @@ class TasksWorker(
                 studentInfoDao = db.studentInfoDao()
             )
 
-            val authorized = repo.authorizeEljur()
-            if (!authorized) return@withContext Result.retry()
-
-            repo.fetchTasks()
-
-            Result.success()
+            when (repo.authorizeEljur()) {
+                is EljurRepository.AuthResult.Success -> {
+                    repo.fetchTasks()
+                    Result.success()
+                }
+                is EljurRepository.AuthResult.Error -> {
+                    Result.retry()
+                }
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             Result.retry()

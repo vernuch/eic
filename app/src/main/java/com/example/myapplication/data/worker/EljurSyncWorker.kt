@@ -26,19 +26,22 @@ class EljurSyncWorker(
         )
 
         try {
-            val authorized = repo.authorizeEljur()
-            if (!authorized) return Result.retry()
-
-            repo.fetchSchedule()
-            repo.fetchTasks()
-            repo.fetchMessages()
-            repo.fetchReplacements()
-
-            return Result.success()
+            when (val authResult = repo.authorizeEljur()) {
+                is EljurRepository.AuthResult.Success -> {
+                    // Авторизация успешна, продолжаем синхронизацию
+                    repo.fetchSchedule()
+                    repo.fetchTasks()
+                    repo.fetchMessages()
+                    repo.fetchReplacements()
+                    return Result.success()
+                }
+                is EljurRepository.AuthResult.Error -> {
+                    return Result.retry()
+                }
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             return Result.retry()
         }
     }
 }
-
