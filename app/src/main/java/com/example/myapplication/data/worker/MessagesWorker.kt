@@ -31,13 +31,11 @@ class MessagesWorker(
                 studentInfoDao = db.studentInfoDao()
             )
 
-            // Исправленная проверка авторизации Eljur
             when (eljurRepo.authorizeEljur()) {
                 is EljurRepository.AuthResult.Success -> {
                     eljurRepo.fetchMessages()
                 }
                 is EljurRepository.AuthResult.Error -> {
-                    // Продолжаем работу даже если Eljur не авторизован
                 }
             }
 

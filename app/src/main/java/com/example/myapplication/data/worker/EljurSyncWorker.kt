@@ -28,7 +28,6 @@ class EljurSyncWorker(
         try {
             when (val authResult = repo.authorizeEljur()) {
                 is EljurRepository.AuthResult.Success -> {
-                    // Авторизация успешна, продолжаем синхронизацию
                     repo.fetchSchedule()
                     repo.fetchTasks()
                     repo.fetchMessages()

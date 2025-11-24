@@ -47,17 +47,14 @@ class ConflictResolver(
     suspend fun resolveConflict(conflict: DataConflict, resolution: ConflictResolution) {
         when (resolution) {
             is ConflictResolution.UseLocal -> {
-                // Сохраняем локальную версию
                 when (conflict.entityType) {
                     "Task" -> {
                         val localTask = conflict.localVersion as TaskEntity
                         taskDao.insertTask(localTask)
                     }
-                    // Добавь другие entity types по необходимости
                 }
             }
             is ConflictResolution.UseRemote -> {
-                // Сохраняем удаленную версию
                 when (conflict.entityType) {
                     "Task" -> {
                         val remoteTask = conflict.remoteVersion as TaskEntity
@@ -66,7 +63,6 @@ class ConflictResolver(
                 }
             }
             is ConflictResolution.Merge -> {
-                // Сливаем изменения
                 when (conflict.entityType) {
                     "Task" -> {
                         val mergedTask = mergeTaskEntities(conflict, resolution.customValues)
@@ -92,9 +88,7 @@ class ConflictResolver(
     }
 
     private fun chooseValue(conflict: DataConflict, fieldName: String, remoteValue: String): String {
-        // Здесь можно добавить логику выбора значения
-        // Например, всегда брать более новую версию или более длинное описание
-        return remoteValue // Пока просто берем remote значение
+        return remoteValue
     }
 
     fun addConflict(conflict: DataConflict) {
@@ -109,7 +103,6 @@ class ConflictResolver(
         val currentConflicts = _conflicts.value.toMutableList()
 
         for (conflict in currentConflicts) {
-            // Автоматически разрешаем конфликты, где изменения не критичны
             if (isSimpleConflict(conflict)) {
                 resolveConflict(conflict, ConflictResolution.UseRemote)
             }

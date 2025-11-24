@@ -1,4 +1,3 @@
-
 package com.example.myapplication.data.entities
 
 import androidx.room.Entity

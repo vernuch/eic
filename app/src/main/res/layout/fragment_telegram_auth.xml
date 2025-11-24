@@ -16,7 +16,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="6dp" />
 
-    <!-- progress -->
     <ProgressBar
         android:id="@+id/progress"
         style="?android:attr/progressBarStyleSmall"
@@ -27,7 +26,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"/>
 
-    <!-- Phone input block -->
     <LinearLayout
         android:id="@+id/phoneBlock"
         android:layout_below="@id/progress"
@@ -64,7 +62,6 @@
             android:minWidth="140dp"/>
     </LinearLayout>
 
-    <!-- Code input block -->
     <LinearLayout
         android:id="@+id/codeBlock"
         android:layout_below="@id/progress"
@@ -109,7 +106,6 @@
             android:minWidth="140dp"/>
     </LinearLayout>
 
-    <!-- Password input block -->
     <LinearLayout
         android:id="@+id/passwordBlock"
         android:layout_below="@id/progress"
@@ -154,7 +150,6 @@
             android:minWidth="140dp"/>
     </LinearLayout>
 
-    <!-- generic error at bottom -->
     <TextView
         android:id="@+id/genericError"
         android:layout_below="@id/passwordBlock"
